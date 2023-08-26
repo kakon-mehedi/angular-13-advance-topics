@@ -1,0 +1,38 @@
+<mat-form-field appearance="fill">
+	<mat-label>Toppings</mat-label>
+	<mat-select
+		[formControl]="toppings"
+		[aria-label]="myAriaLabel"
+		[aria-labelledby]="'Kakon Mehedi'"
+		[compareWith]="compareFn"
+		[disableOptionCentering]="false"
+		[disableRipple]="false"
+		[disabled]="false"
+		[errorStateMatcher]="error"
+		[multiple]="true"
+		[panelClass]="kakonClass"
+		[placeholder]="myPlaceholder"
+		[required]="true"
+		[sortComparator]="sort"
+		[value]="'Kakon'"
+		(openedChange)="openChange($event)"
+		(selectionChange)="selectionChange($event)"
+		#toppingsSelect
+	>
+		<mat-select-trigger>
+			{{ toppings.value ? toppings.value[0] : '' }}
+			<span
+				*ngIf="toppings.value?.length > 1"
+				class="example-additional-selection"
+			>
+				(+{{ toppings.value.length - 1 }}
+				{{ toppings.value?.length === 2 ? 'other' : 'others' }})
+			</span>
+		</mat-select-trigger>
+		<mat-option
+			*ngFor="let topping of toppingList"
+			[value]="topping"
+			>{{ topping }}</mat-option
+		>
+	</mat-select>
+</mat-form-field>
