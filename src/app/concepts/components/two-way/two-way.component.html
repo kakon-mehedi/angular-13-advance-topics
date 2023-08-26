@@ -1,0 +1,15 @@
+<p>Two way data binding implementation</p>
+
+<!-- Regular ngModel -->
+<input
+	[(ngModel)]="myName"
+	type="text"
+/>
+<h4>My name is {{ myName }}</h4>
+
+<!-- Custom two way binding by Kakon Mehedi -->
+
+<h2>Custom counter app</h2>
+
+<app-counter [(startFrom)]="counterValue"></app-counter>
+<p>Counter value: {{ counterValue }}</p>
