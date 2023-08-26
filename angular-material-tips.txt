@@ -1,0 +1,38 @@
+/* Angular Material */
+
+Angular material component Properties trigger and getValue: 
+
+@Input() && @Output() should be triggerd from view (.html file)
+
+Rest of the properties can be accessed via
+@ViewChild('localVariable') varName:ClassNameOrType
+
+Mind it when using viewChild ClassName or Type must dite hobe 
+to get access all the properties and methods
+
+@Output('opened')
+openedStream: EventEmitter<void>
+ekhane (opened)="handleEvent()" kaaj korbe openedStream na. 
+
+@Output()
+yearSelected: EventEmitter<D>
+ekhane (yearSelected)="handleEvent()" kaaj korbe
+
+<mat-date-range-input 
+	[rangePicker]="picker" 
+	[min]="today">
+</mat-date-range-input> 
+
+Ekhane [min] jodi getter function hoy tahole property bind [min] kaaj
+korbe, min="expression" kaaj korbe na. 
+
+@Input
+
+Input e always function defination er refeerance pathate hoy.
+handleFunction() only @Output er khetre kaaj kore. 
+
+
+@Input() & @Output() chara baki sob method and properties access
+korar jonno oi particular directives er class ke viewChild korte hobe
+
+
