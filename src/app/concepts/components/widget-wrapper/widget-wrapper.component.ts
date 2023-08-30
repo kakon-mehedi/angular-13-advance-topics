@@ -1,6 +1,6 @@
 import { Component, ContentChild, OnInit } from '@angular/core';
-import { VelocityWidgetComponent } from './velocity-widget/velocity-widget.component';
-import { WeatherWidgetComponent } from './weather-widget/weather-widget.component';
+import { Iwidget } from '../../models/Iwidget';
+import { WIDGET_TOKEN } from '../../tokens/widgetToken';
 
 @Component({
 	selector: 'app-widget-wrapper',
@@ -10,23 +10,14 @@ import { WeatherWidgetComponent } from './weather-widget/weather-widget.componen
 export class WidgetWrapperComponent implements OnInit {
 	/* Detecting Components Content Referrence */
 
-	@ContentChild(VelocityWidgetComponent)
-	velocityCompRef!: VelocityWidgetComponent;
-
-	@ContentChild(WeatherWidgetComponent)
-	weatherCompRef!: WeatherWidgetComponent;
+	@ContentChild(WIDGET_TOKEN)
+	widget!: Iwidget;
 
 	constructor() {}
 
 	ngOnInit(): void {}
 
 	onRefresh() {
-		if (this.velocityCompRef) {
-			this.velocityCompRef.refresh();
-		}
-
-		if (this.weatherCompRef) {
-			this.weatherCompRef.refresh();
-		}
+		this.widget.refresh();
 	}
 }
