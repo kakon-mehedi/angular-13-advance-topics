@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { INITIAL_TODOS } from '../constants/todos.constants';
 
 import * as TodosActions from './todos.action';
@@ -10,11 +10,11 @@ export interface ITodo {
 	isComplete: boolean;
 }
 
-export interface TodosState {
+export interface ITodosState {
 	Todos: ITodo[];
 }
 
-const INITIAL_STATE: TodosState = {
+const INITIAL_STATE: ITodosState = {
 	Todos: INITIAL_TODOS,
 };
 

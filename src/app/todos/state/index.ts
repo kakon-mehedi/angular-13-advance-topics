@@ -1,12 +1,15 @@
-import { TodosReducer } from './todos.reducer';
 import * as fromTodos from './todos.reducer';
+import * as fromCounter from './counter.reducer';
 
 export interface ITodosModuleState {
-	Todos: fromTodos.TodosState;
+	Todos: fromTodos.ITodosState;
+	Counter: fromCounter.ICounterState;
 }
 
-export const TodosFeatureKey = 'TodosFeatureKey';
-
 export const TodosModuleReducers = {
-	Todos: TodosReducer,
+	Todos: fromTodos.TodosReducer,
+	Counter: fromCounter.counterReducer,
 };
+
+export const CounterFeatureKey = 'CounterFeatureKey';
+export const TodosFeatureKey = 'TodosFeatureKey';

@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/modules/material.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import * as fromApp from './app-state/app.reducers';
 
 @NgModule({
 	declarations: [AppComponent],

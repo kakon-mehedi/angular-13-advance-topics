@@ -7,6 +7,8 @@ import { CreateTodoComponent } from './components/create-todo/create-todo.compon
 import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
 import { StoreModule } from '@ngrx/store';
 import { TodosFeatureKey, TodosModuleReducers } from './state';
+import { CountersComponent } from './components/counters/counters.component';
+import { MaterialModule } from '../shared/modules/material.module';
 
 const routes: Routes = [
 	{
@@ -21,11 +23,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	declarations: [TodosComponent, CreateTodoComponent, EditTodoComponent],
+	declarations: [
+		TodosComponent,
+		CreateTodoComponent,
+		EditTodoComponent,
+		CountersComponent,
+	],
 	imports: [
 		CommonModule,
 		RouterModule.forChild(routes),
 		StoreModule.forFeature(TodosFeatureKey, TodosModuleReducers),
+		MaterialModule,
 	],
 })
 export class TodosModule {}
