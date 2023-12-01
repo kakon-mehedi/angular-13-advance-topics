@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/modules/material.module';
 import { TodosModule } from './todos/todos.module';
 import { PostsModule } from './posts/posts.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -15,6 +17,8 @@ import { PostsModule } from './posts/posts.module';
 		AppRoutingModule,
 		MaterialModule,
 		BrowserAnimationsModule,
+		StoreModule.forRoot({}, {}),
+		EffectsModule.forRoot([]),
 	],
 	providers: [],
 	bootstrap: [AppComponent],
