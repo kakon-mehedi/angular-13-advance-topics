@@ -6,6 +6,9 @@ export enum CounterActionType {
 	RESET = '[Counter] RESET',
 }
 
-export const increment = createAction(CounterActionType.INCREMENT);
+export const increment = createAction(
+	CounterActionType.INCREMENT,
+	props<{ incrementBy: number }>()
+);
 export const decrement = createAction(CounterActionType.DECREMENT);
 export const reset = createAction(CounterActionType.RESET);

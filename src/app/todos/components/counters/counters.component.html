@@ -1,21 +1,33 @@
 <div class="container">
 	<h1>{{ initialCounterValue }}</h1>
 
+	<input
+		type="number"
+		placeholder="increment size"
+		#incrementInput
+	/>
+
 	<button
+		#incrementButton
 		mat-raised-button
 		color="primary"
+		(click)="increment(+incrementInput.value)"
 	>
 		Increment
 	</button>
 	<button
+		#decrementButton
 		mat-raised-button
 		color="primary"
+		[disabled]="isDisableDecrement"
+		(click)="decrement()"
 	>
 		Decrement
 	</button>
 	<button
 		mat-raised-button
 		color="warn"
+		(click)="reset()"
 	>
 		Reset
 	</button>

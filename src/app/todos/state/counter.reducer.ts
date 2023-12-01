@@ -1,5 +1,5 @@
 import * as CounterActions from './counters.action';
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, props } from '@ngrx/store';
 
 export interface ICounter {
 	value: number;
@@ -18,11 +18,11 @@ const INITIAL_STATE: ICounterState = {
 export const counterReducer = createReducer(
 	INITIAL_STATE,
 
-	on(CounterActions.increment, (state) => {
+	on(CounterActions.increment, (state, props) => {
 		return {
 			...state,
 			counter: {
-				value: state.counter.value + 1,
+				value: state.counter.value + props.incrementBy,
 			},
 		};
 	}),
@@ -40,7 +40,7 @@ export const counterReducer = createReducer(
 		return {
 			...state,
 			counter: {
-				value: state.counter.value + 1,
+				value: 0,
 			},
 		};
 	})
