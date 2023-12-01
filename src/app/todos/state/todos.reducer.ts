@@ -1,5 +1,7 @@
+import { Action, createReducer, on } from '@ngrx/store';
 import { INITIAL_TODOS } from '../constants/todos.constants';
-import { TodosActions, TodosActionType } from './todos.action';
+
+import * as TodosActions from './todos.action';
 
 export interface ITodo {
 	id: string;
@@ -16,34 +18,33 @@ const INITIAL_STATE: TodosState = {
 	Todos: INITIAL_TODOS,
 };
 
-export function TodosReducer(
-	state = INITIAL_STATE,
-	action: TodosActions
-): TodosState {
-	switch (action.type) {
-		case TodosActionType.ADD_TODO:
-			return {
-				...state,
-				Todos: [...state.Todos, action.payload],
-			};
-		case TodosActionType.UPDATE_TODO:
-			const todoThatNeedToUpdate = state.Todos.find(
-				(todo) => todo.id === action.payload.id
-			);
-			const updatedTodo = { ...todoThatNeedToUpdate, ...action.payload }; // copied immutively
-			const updatedTodos = [...state.Todos, updatedTodo]; // updated immutively
+export const TodosReducer = createReducer(
+	INITIAL_STATE,
 
-			return {
-				...state,
-				Todos: updatedTodos,
-			};
+	on(TodosActions.addTodo, (state, props) => {
+		return {
+			...state,
+			Todos: [...state.Todos, props],
+		};
+	}),
 
-		case TodosActionType.DELETE_TODO:
-			return {
-				...state,
-				Todos: state.Todos.filter((todo) => todo.id !== action.payload),
-			};
-		default:
-			return state;
-	}
-}
+	on(TodosActions.updateTodo, (state, props) => {
+		const todoThatNeedToUpdate = state.Todos.find(
+			(todo) => todo.id === props.id
+		);
+		const updatedTodo = { ...todoThatNeedToUpdate, ...props };
+		const updatedTodos = [...state.Todos, updatedTodo];
+
+		return {
+			...state,
+			Todos: updatedTodos,
+		};
+	}),
+
+	on(TodosActions.deleteTodo, (state, props) => {
+		return {
+			...state,
+			Todos: state.Todos.filter((todo) => todo.id !== props.id),
+		};
+	})
+);

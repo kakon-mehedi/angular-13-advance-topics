@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { ITodo } from './todos.reducer';
 
 export enum TodosActionType {
@@ -7,22 +7,13 @@ export enum TodosActionType {
 	DELETE_TODO = '[Todo] Delete Todo',
 }
 
-export type TodosActions = AddTodo | UpdateTodo | DeleteTodo;
+export const addTodo = createAction(TodosActionType.ADD_TODO, props<ITodo>());
 
-export class AddTodo implements Action {
-	readonly type = TodosActionType.ADD_TODO;
-
-	constructor(public payload: ITodo) {}
-}
-
-export class UpdateTodo implements Action {
-	readonly type = TodosActionType.UPDATE_TODO;
-
-	constructor(public payload: ITodo) {}
-}
-
-export class DeleteTodo implements Action {
-	readonly type = TodosActionType.DELETE_TODO;
-
-	constructor(public payload: string) {}
-}
+export const updateTodo = createAction(
+	TodosActionType.UPDATE_TODO,
+	props<ITodo>()
+);
+export const deleteTodo = createAction(
+	TodosActionType.DELETE_TODO,
+	props<{ id: string }>()
+);

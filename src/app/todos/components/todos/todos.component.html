@@ -1,1 +1,11 @@
-<p>todos works!</p>
+<div class="container">
+	<h1>Todo list</h1>
+	<ul class="todo-lsit">
+		<li
+			*ngFor="let todo of todos$ | async"
+			class="todo"
+		>
+			{{ todo.title }}
+		</li>
+	</ul>
+</div>

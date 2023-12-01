@@ -5,6 +5,8 @@ import { pathToFileURL } from 'url';
 import { TodosComponent } from './components/todos/todos.component';
 import { CreateTodoComponent } from './components/create-todo/create-todo.component';
 import { EditTodoComponent } from './components/edit-todo/edit-todo.component';
+import { StoreModule } from '@ngrx/store';
+import { TodosFeatureKey, TodosModuleReducers } from './state';
 
 const routes: Routes = [
 	{
@@ -20,6 +22,10 @@ const routes: Routes = [
 
 @NgModule({
 	declarations: [TodosComponent, CreateTodoComponent, EditTodoComponent],
-	imports: [CommonModule, RouterModule.forChild(routes)],
+	imports: [
+		CommonModule,
+		RouterModule.forChild(routes),
+		StoreModule.forFeature(TodosFeatureKey, TodosModuleReducers),
+	],
 })
 export class TodosModule {}

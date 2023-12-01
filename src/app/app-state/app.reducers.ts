@@ -5,6 +5,6 @@ export interface AppState {
 	TodoList: fromTodos.TodosState;
 }
 
-// export const appReducer: ActionReducerMap<AppState> = {
-// 	TodoList: fromTodos.TodosReducer,
-// };
+export const appReducer: ActionReducerMap<AppState> = {
+	TodoList: fromTodos.TodosReducer,
+};
