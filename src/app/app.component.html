@@ -1,1 +1,30 @@
-<app-hello-world></app-hello-world>
+<mat-toolbar>
+	<button
+		mat-icon-button
+		class="example-icon"
+		aria-label="Example icon-button with menu icon"
+	>
+		<mat-icon>menu</mat-icon>
+	</button>
+	<span>ngRx</span>
+	<span class="example-spacer"></span>
+
+	<button
+		routerLink="todos"
+		mat-raised-button
+		color="primary"
+	>
+		Todos
+	</button>
+
+	<button
+		routerLink="posts"
+		mat-raised-button
+		color="primary"
+		style="margin-left: 8px"
+	>
+		Posts
+	</button>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
