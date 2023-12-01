@@ -5,10 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/modules/material.module';
-import { TodosModule } from './todos/todos.module';
-import { PostsModule } from './posts/posts.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import * as fromApp from './app-state/app.reducers';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -17,7 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 		AppRoutingModule,
 		MaterialModule,
 		BrowserAnimationsModule,
-		StoreModule.forRoot({}, {}),
+		StoreModule.forRoot({}),
 		EffectsModule.forRoot([]),
 	],
 	providers: [],
