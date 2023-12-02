@@ -6,19 +6,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HelloWorldComponent } from './concepts/components/hello-world/hello-world.component';
 import { MaterialModule } from './shared/modules/material.module';
+import { RxjsOperatorsAtAGlanceComponent } from './concepts/components/rxjs-operators-at-a-glance/rxjs-operators-at-a-glance.component';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HelloWorldComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
-    BrowserAnimationsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		HelloWorldComponent,
+		RxjsOperatorsAtAGlanceComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		MaterialModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+	],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
