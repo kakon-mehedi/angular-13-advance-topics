@@ -144,7 +144,7 @@ export class RxjsOperatorsAtAGlanceComponent implements OnInit {
 				console.log(data); // will get the photos, posts and users API data.
 			});
 
-		// ---------Amra ekhane merge map use na kore only map use korle diffence ta aro better bujht parbo---------------
+		// -------Amra ekhane merge map use na kore only map use korle diffence ta aro better bujhte parbo---------------
 		// ---------------------------------------------------------------------------------------------------------------
 
 		of('photos', 'posts', 'users') //outer observable
@@ -200,4 +200,6 @@ export class RxjsOperatorsAtAGlanceComponent implements OnInit {
 			)
 			.subscribe((res) => console.log(res)); // 6, 8, 10
 	}
+
+	errorHandalingOperators() {}
 }
