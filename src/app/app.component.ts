@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, Self } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'fresh-angular-13';
+export class AppComponent implements AfterViewInit {
+	ngAfterViewInit(): void {
+		this.loadCKEditor();
+	}
+
+	loadCKEditor(): void {
+		
+	}
 }
