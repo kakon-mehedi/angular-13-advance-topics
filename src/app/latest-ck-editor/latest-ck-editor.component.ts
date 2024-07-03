@@ -1,19 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-// import {
-// 	ClassicEditor,
-// 	Essentials,
-// 	Bold,
-// 	Italic,
-// 	Font,
-// 	Paragraph,
-// } from 'ckeditor';
-
-type EditorConfig = {
-	plugins: any[];
-	toolbar: string[];
-};
-
 @Component({
 	selector: 'app-latest-ck-editor',
 	templateUrl: './latest-ck-editor.component.html',
@@ -22,7 +7,6 @@ type EditorConfig = {
 export class LatestCkEditorComponent implements OnInit {
 	constructor() {}
 
-	
 	ngOnInit(): void {}
 
 	ngAfterViewInit(): void {
@@ -30,24 +14,23 @@ export class LatestCkEditorComponent implements OnInit {
 		this.loadCKEditorMainJsFile();
 	}
 
-	ngOnDestroy(): void {
-		
-	}
+	ngOnDestroy(): void {}
 
 	loadStyles() {
 		const style = this.generateStyle('../../assets/ck-editor/style.css');
-		const ckEditorStyle = this.generateStyle('../../assets/ck-editor/ckeditor5/ckeditor5.css');
+		const ckEditorStyle = this.generateStyle(
+			'../../assets/ck-editor/ckeditor5/ckeditor5.css'
+		);
 		document.head.appendChild(style);
 		document.head.appendChild(ckEditorStyle);
-
 	}
 
 	generateStyle(url: string): HTMLLinkElement {
 		const link: HTMLLinkElement = document.createElement('link');
 		link.setAttribute('rel', 'stylesheet');
-		link.setAttribute('type', 'text/css')
+		link.setAttribute('type', 'text/css');
 		link.setAttribute('href', url);
-		
+
 		return link;
 	}
 
@@ -58,10 +41,8 @@ export class LatestCkEditorComponent implements OnInit {
 
 		script.onload = () => {
 			console.log('Script loaded');
-		}
+		};
 
 		document.body.appendChild(script);
 	}
- 
-	
 }
