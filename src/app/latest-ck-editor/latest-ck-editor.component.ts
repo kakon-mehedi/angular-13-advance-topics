@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 @Component({
 	selector: 'app-latest-ck-editor',
 	templateUrl: './latest-ck-editor.component.html',
 	styleUrls: ['./latest-ck-editor.component.scss'],
 })
-export class LatestCkEditorComponent implements OnInit {
+export class LatestCkEditorComponent implements OnInit, AfterViewInit {
+	mainJsFileLocation = '../../assets/ck-editor/main.js';
+	ckEditorCssFileLocation = '../../assets/ck-editor/ckeditor5/ckeditor5.css';
+	customCssFileLocation = '../../assets/ck-editor/style.css';
+
 	constructor() {}
 
 	ngOnInit(): void {}
@@ -17,10 +21,8 @@ export class LatestCkEditorComponent implements OnInit {
 	ngOnDestroy(): void {}
 
 	loadStyles() {
-		const style = this.generateStyle('../../assets/ck-editor/style.css');
-		const ckEditorStyle = this.generateStyle(
-			'../../assets/ck-editor/ckeditor5/ckeditor5.css'
-		);
+		const style = this.generateStyle(this.customCssFileLocation);
+		const ckEditorStyle = this.generateStyle(this.ckEditorCssFileLocation);
 		document.head.appendChild(style);
 		document.head.appendChild(ckEditorStyle);
 	}
@@ -37,7 +39,7 @@ export class LatestCkEditorComponent implements OnInit {
 	loadCKEditorMainJsFile() {
 		const script: HTMLScriptElement = document.createElement('script');
 		script.setAttribute('type', 'module');
-		script.setAttribute('src', '../../assets/ck-editor/main.js');
+		script.setAttribute('src', this.mainJsFileLocation);
 
 		script.onload = () => {
 			console.log('Script loaded');
