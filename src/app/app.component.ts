@@ -6,11 +6,5 @@ import { AfterViewInit, Component, Self } from '@angular/core';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements AfterViewInit {
-	ngAfterViewInit(): void {
-		this.loadCKEditor();
-	}
-
-	loadCKEditor(): void {
-		
-	}
+	ngAfterViewInit(): void {}
 }

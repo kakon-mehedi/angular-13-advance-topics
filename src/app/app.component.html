@@ -1,1 +1,6 @@
-<app-latest-ck-editor></app-latest-ck-editor>
+<app-latest-ck-editor
+	[focusOnStart]="true"
+	(blur)="onBlur($event)"
+	(change)="onChange($event)"
+>
+</app-latest-ck-editor>

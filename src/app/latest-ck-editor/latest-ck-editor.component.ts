@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
 	selector: 'app-latest-ck-editor',
@@ -7,16 +6,32 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./latest-ck-editor.component.scss'],
 })
 export class LatestCkEditorComponent implements OnInit {
+	@Input()
+	hasCustomEditorConfig: boolean = false;
+
+	@Input()
+	editorConfig: any = {};
+
+	@Input()
+	focusOnStart: boolean = true;
+
+	@Output()
+	blur: EventEmitter<any> = new EventEmitter();
+
+	@Output()
+	change: EventEmitter<any> = new EventEmitter();
+
 	constructor() {}
 
-	classicUrl =
-		'https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js';
-	coreCdnUrl = 'https://cdn.ckeditor.com/ckeditor5/42.0.0/ckeditor5.js';
+	decoupledEditorCdnLocation =
+		'https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-build-decoupled-document@42.0.0/build/ckeditor.min.js';
+
+	decoupledEditorOfflineLocation =
+		'../../assets/ck-editor/ckeditor5/decoupled-editor.js';
 
 	ckEditorCssFileLocation = '../../assets/ck-editor/ckeditor5/ckeditor5.css';
 	customCssFileLocation = '../../assets/ck-editor/style.css';
 
-	ckEditorCdnUrl = this.coreCdnUrl;
 	editorInstance: any;
 
 	ngOnInit(): void {}
@@ -33,8 +48,7 @@ export class LatestCkEditorComponent implements OnInit {
 	}
 	loadCKEditor(): void {
 		const script = document.createElement('script');
-		script.src =
-			'https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-build-decoupled-document@42.0.0/build/ckeditor.min.js';
+		script.src = this.decoupledEditorOfflineLocation;
 		script.onload = () => {
 			this.initializeCKEditor();
 		};
@@ -43,11 +57,8 @@ export class LatestCkEditorComponent implements OnInit {
 
 	initializeCKEditor(): void {
 		const editorContainer = document.querySelector('#editor');
-		const plugins = (window as any).DecoupledEditor;
 		if (editorContainer && (window as any).DecoupledEditor) {
-			(window as any).DecoupledEditor.create(
-				editorContainer
-			)
+			(window as any).DecoupledEditor.create(editorContainer)
 				.then((editor: any) => {
 					this.editorInstance = editor;
 					const toolbarContainer =
@@ -59,48 +70,13 @@ export class LatestCkEditorComponent implements OnInit {
 					}
 
 					const availablePlugins = editor.plugins;
- 
 					console.log('Available Plugins:', availablePlugins);
-		   
-					// editor.config.set({
-					//   toolbar: {
-					// 	items: [
-					// 	  'undo',
-					// 	  'redo',
-					// 	  '|',
-					// 	  'heading',
-					// 	  '|',
-					// 	  'fontSize',
-					// 	  'fontFamily',
-					// 	  'fontColor',
-					// 	  'fontBackgroundColor',
-					// 	  '|',
-					// 	  'bold',
-					// 	  'italic',
-					// 	  'underline',
-					// 	  '|',
-					// 	  'link',
-					// 	  'insertImage',
-					// 	  'insertTable',
-					// 	  'highlight',
-					// 	  'blockQuote',
-					// 	  '|',
-					// 	  'alignment',
-					// 	  '|',
-					// 	  'bulletedList',
-					// 	  'numberedList',
-					// 	  'todoList',
-					// 	  'indent',
-					// 	  'outdent',
-					// 	],
-					// 	shouldNotGroupWhenFull: true,
-					//   }
-					// });
 
-					this.editorInstance.model.document.on('change:data', () => {
-						const data = this.editorInstance.getData();
-						console.log('Content has changed:', data);
-					});
+					if (this.hasCustomEditorConfig) {
+						this.setCustomEditorConfig(editor, this.editorConfig);
+					}
+
+					this.emitOutputValueEvents();
 				})
 				.catch((error: any) => {
 					console.error('Error initializing CKEditor:', error);
@@ -109,6 +85,30 @@ export class LatestCkEditorComponent implements OnInit {
 			console.error('CKEditor not found or editorContainer is missing.');
 		}
 	}
+
+	emitOutputValueEvents() {
+		this.emitOnChangeOutputData();
+		this.emitOnBlurOutputData();
+	}
+
+	emitOnChangeOutputData() {
+		this.editorInstance.model.document.on('change:data', () => {
+			const data = this.editorInstance.getData();
+			this.change.emit(data);
+		});
+	}
+
+	emitOnBlurOutputData() {
+		this.editorInstance.ui.focusTracker.on('change:isFocused', () => {
+			const data = this.editorInstance.getData();
+			this.blur.emit(data);
+		});
+	}
+
+	setCustomEditorConfig(editor: any, customConfig: any) {
+		editor.config.set(customConfig);
+	}
+
 	getEditorContent(): void {
 		if (this.editorInstance) {
 			const content = this.editorInstance.getData();
@@ -121,22 +121,6 @@ export class LatestCkEditorComponent implements OnInit {
 			this.editorInstance.setData(content);
 		}
 	}
-
-	// pushAllRequiredPlugins(plugins: any[]): void {
-	// 	const requiredPlugins = [
-	// 		'Essentials',
-	// 		'Bold',
-	// 		'Italic',
-	// 		'Font',
-	// 		'Paragraph',
-	// 	];
-
-	// 	this.editorConfig.plugins = plugins.filter((plugin: any) => {
-	// 		return plugin && requiredPlugins.includes(plugin.pluginName);
-	// 	});
-
-	// 	console.log(plugins);
-	// }
 
 	loadStyles() {
 		const style = this.generateStyle(this.customCssFileLocation);
