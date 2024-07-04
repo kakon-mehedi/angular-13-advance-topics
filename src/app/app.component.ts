@@ -7,4 +7,12 @@ import { AfterViewInit, Component, Self } from '@angular/core';
 })
 export class AppComponent implements AfterViewInit {
 	ngAfterViewInit(): void {}
+
+	onBlur(event: any) {
+		console.log('BLUR => ', event);
+	}
+
+	onChange(event: any) {
+		console.log('CHANGE => ', event);
+	}
 }
