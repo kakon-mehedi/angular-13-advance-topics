@@ -1,0 +1,16 @@
+<ng-container *ngIf="!folder.length">
+	<div class="container" (click)="openFolder(folderId)">
+		<p class="folder">{{ folder.name }}</p>
+	
+		<ng-container *ngIf="opened">
+			<p *ngFor="let file of folder.files">
+				<app-file [file]="file"></app-file>
+			</p>
+		</ng-container>
+	</div>
+	
+</ng-container>
+
+<ng-container *ngIf="folder.length">
+	<app-file-explorer [datax]="folder"></app-file-explorer>
+</ng-container>

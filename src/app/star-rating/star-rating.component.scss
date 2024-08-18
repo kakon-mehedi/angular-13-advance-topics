@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    gap: 24px;
+    background: whitesmoke;
+    padding: 24px;
+}
+
+.star{
+   font-size: 2rem;
+}
+
+.star:hover {
+    cursor: pointer;
+}

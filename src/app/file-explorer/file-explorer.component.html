@@ -1,0 +1,10 @@
+<ng-container *ngFor="let item of items; index as i">
+    <ng-container *ngIf="item?.child?.length">
+        <app-folder [folder]="item" [folderId]="i"></app-folder>
+    </ng-container>
+
+    <ng-container *ngIf="!item.child">
+        <app-file [file]="item"></app-file>
+    </ng-container>
+   
+</ng-container>

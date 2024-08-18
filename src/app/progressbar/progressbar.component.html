@@ -1,0 +1,20 @@
+<div class="container">
+	<h1>Progressbar</h1>
+
+	<div class="progressbar">
+		<div
+			[style.width.%]="progress$ | async"
+			class="progress-bg"
+		></div>
+		<div
+            *ngIf="progress$ | async as progress"
+			class="progress"
+			[style.color]="progress > 49 ? 'white' : 'black'"
+		>
+			{{ progress$ | async }}%
+		</div>
+	</div>
+
+	<p *ngIf="(progress$ | async) !== 100">Loading</p>
+	<p *ngIf="(progress$ | async) === 100">Completed</p>
+</div>

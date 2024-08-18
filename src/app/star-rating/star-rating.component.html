@@ -1,0 +1,12 @@
+<div class="container">
+	<div
+		*ngFor="let star of stars; index as i"
+		class="star"
+        [hilight]="'teal'"
+        [index]="i"
+        [id]="i"
+		(rating)="getRating($event)"
+	>
+		★
+	</div>
+</div>
