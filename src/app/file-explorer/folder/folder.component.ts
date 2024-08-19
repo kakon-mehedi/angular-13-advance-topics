@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Folder } from './folder.model';
 
 
 @Component({
@@ -16,6 +17,8 @@ export class FolderComponent implements OnInit {
   @Input()
   opened: boolean = false;
 
+  creatingNewFolder = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -27,6 +30,12 @@ export class FolderComponent implements OnInit {
     console.log(this.opened);
 
    this.folder = this.folder.child;
+  }
+
+  addNewFolder(e: any) {
+    e.preventDefault();
+    this.creatingNewFolder = true;
+    const folder = new Folder('Test');
   }
 
 }

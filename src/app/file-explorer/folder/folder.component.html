@@ -1,14 +1,29 @@
 <ng-container *ngIf="!folder.length">
-	<div class="container" (click)="openFolder(folderId)">
-		<p class="folder">{{ folder.name }}</p>
-	
+	<div
+		class="container"
+		(click)="openFolder(folderId)"
+	>
+		<p class="folder">
+			{{ folder.name }}
+			<span class="add-new"
+				><button (click)="addNewFolder($event)">
+					+ {{ creatingNewFolder ? 'Save' : 'Add New' }}
+				</button></span
+			>
+
+			<input
+				*ngIf="creatingNewFolder"
+				type="text"
+				placeholder="Untiled Folder"
+			/>
+		</p>
+
 		<ng-container *ngIf="opened">
 			<p *ngFor="let file of folder.files">
 				<app-file [file]="file"></app-file>
 			</p>
 		</ng-container>
 	</div>
-	
 </ng-container>
 
 <ng-container *ngIf="folder.length">
