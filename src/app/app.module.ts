@@ -5,15 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatSelectComponent } from './concepts/components/mat-select/mat-select.component';
-import { MaterialDatePickerComponent } from './concepts/components/material-date-picker/material-date-picker.component';
-import { MaterialModule } from './shared/modules/material.module';
+import { MaterialModule } from './material.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    MaterialDatePickerComponent,
-    MatSelectComponent
   ],
   imports: [
     BrowserModule,
