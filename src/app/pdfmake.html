@@ -1,0 +1,109 @@
+<button
+	mat-raised-button
+	(click)="exportToPdf()"
+>
+	Export to Pdf
+</button>
+
+<div
+	#pdfContent
+	style="font-family: Arial, sans-serif; margin: 20px; line-height: 1.6"
+>
+	<!-- Header Section -->
+	<div style="text-align: center; margin-bottom: 20px">
+		<h1 style="font-size: 24px; color: #333; margin: 0">Basic Report</h1>
+		<p style="font-size: 14px; color: #555; margin: 0">
+			A sample report with inline styles
+		</p>
+	</div>
+
+	<!-- Section 1: Introduction -->
+	<div style="margin-bottom: 20px">
+		<h2 style="font-size: 18px; color: #333; margin: 0">Introduction</h2>
+		<p style="font-size: 14px; color: #555; margin: 5px 0">
+			This is a sample report showcasing how inline styles can be applied
+			to HTML elements. The purpose of this report is to demonstrate a
+			clean, professional UI for a report.
+		</p>
+	</div>
+
+	<!-- Section 2: Table of Data -->
+	<div style="margin-bottom: 20px">
+		<h2 style="font-size: 18px; color: #333; margin: 0">Table of Data</h2>
+		<table
+			style="
+				width: 100%;
+				border-collapse: collapse;
+				margin: 10px 0;
+				font-size: 14px;
+				color: #333;
+			"
+		>
+			<thead>
+				<tr>
+					<th
+						style="
+							border: 1px solid #ccc;
+							padding: 8px;
+							background-color: #f9f9f9;
+						"
+					>
+						Column 1
+					</th>
+					<th
+						style="
+							border: 1px solid #ccc;
+							padding: 8px;
+							background-color: #f9f9f9;
+						"
+					>
+						Column 2
+					</th>
+					<th
+						style="
+							border: 1px solid #ccc;
+							padding: 8px;
+							background-color: #f9f9f9;
+						"
+					>
+						Column 3
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="border: 1px solid #ccc; padding: 8px">Data 1</td>
+					<td style="border: 1px solid #ccc; padding: 8px">Data 2</td>
+					<td style="border: 1px solid #ccc; padding: 8px">Data 3</td>
+				</tr>
+				<tr>
+					<td style="border: 1px solid #ccc; padding: 8px">Data A</td>
+					<td style="border: 1px solid #ccc; padding: 8px">Data B</td>
+					<td style="border: 1px solid #ccc; padding: 8px">Data C</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Section 3: Summary -->
+	<div style="margin-bottom: 20px">
+		<h2 style="font-size: 18px; color: #333; margin: 0">Summary</h2>
+		<p style="font-size: 14px; color: #555; margin: 5px 0">
+			This report demonstrates a basic layout for a report with an
+			introduction, data table, and summary. Use this template to create
+			visually appealing reports for various purposes.
+		</p>
+	</div>
+
+	<!-- Footer -->
+	<div
+		style="
+			text-align: center;
+			margin-top: 20px;
+			font-size: 12px;
+			color: #777;
+		"
+	>
+		<p>Generated on: <span id="date"></span></p>
+	</div>
+</div>

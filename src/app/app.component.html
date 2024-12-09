@@ -1,1 +1,44 @@
-<h1>Hello World</h1>
+
+<button mat-raised-button (click)="exportToPdf()">Export to Pdf</button>
+
+<div #pdfContent>
+    <div class="report-container">
+        <header class="report-header">
+          <h1>Monthly Sales Report</h1>
+          <p class="report-date">December 2024</p>
+        </header>
+    
+        <section class="report-summary">
+          <h2>Summary</h2>
+          <p>Total Sales: <strong>$12,345</strong></p>
+          <p>Top Performing Product: <strong>Gadget Pro</strong></p>
+        </section>
+    
+        <section class="report-table">
+          <h2>Sales Data</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Units Sold</th>
+                <th>Revenue</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items">
+                <td>Gadget Pro</td>
+                <td>500</td>
+                <td>$5,000</td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </section>
+    
+        <footer class="report-footer">
+          <p>Generated on: <span id="current-date"></span></p>
+        </footer>
+      </div>
+</div>
+
+
