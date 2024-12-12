@@ -21,7 +21,7 @@ export class AppComponent {
 		filename: 'newfile.pdf',
 		image: {
 			type: 'jpeg',
-			quality: '0.90',
+			quality: '1',
 		},
 		html2canvas: {
 			scale: 2,
@@ -34,7 +34,7 @@ export class AppComponent {
 	};
 
 	exportToPdf() {
-		this.exportByPdfMake();
+		this.exportPdfByHtml2PdfPackage();
 	}
 
 	exportPdfByHtml2PdfPackage() {

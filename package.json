@@ -22,6 +22,7 @@
     "@angular/router": "~13.3.0",
     "html-to-pdfmake": "^2.5.17",
     "html2pdf.js": "^0.10.1",
+    "loadash": "^1.0.0",
     "pdfmake": "0.2.6",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
