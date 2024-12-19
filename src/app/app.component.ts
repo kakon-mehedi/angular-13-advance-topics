@@ -3,6 +3,7 @@ import html2pdf from 'html2pdf.js';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import htmlToPdfmake from 'html-to-pdfmake';
+import jsPDF from 'jspdf';
 
 // Ensure the pdfMake uses vfs_fonts
 (pdfMake as any).vfs = (pdfFonts as any).pdfMake.vfs;
@@ -34,7 +35,8 @@ export class AppComponent {
 	};
 
 	exportToPdf() {
-		this.exportPdfByHtml2PdfPackage();
+		this.exportWithJspdf(this.elementRef.nativeElement);
+		//this.exportPdfByHtml2PdfPackage();
 	}
 
 	exportPdfByHtml2PdfPackage() {
@@ -87,5 +89,26 @@ export class AppComponent {
 			// Generate the PDF
 			pdfMake.createPdf(documentDefinition).download('exported.pdf');
 		}
+	}
+
+	exportWithJspdf(element: HTMLElement) {
+		let doc: jsPDF = new jsPDF({
+			unit: 'px',
+			format: 'a4',
+			orientation: 'portrait',
+		});
+
+		const result = doc.html(element, {
+			callback: () => {
+				doc.save("test", {
+					returnPromise: true,
+				});
+			},
+			x: 10,
+			y: 10,
+			width: 290,
+			windowWidth: 650
+		});
+
 	}
 }

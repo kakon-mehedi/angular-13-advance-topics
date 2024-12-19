@@ -1,0 +1,15 @@
+<button
+	mat-raised-button
+	(click)="exportToPdf()"
+>
+	Export to Pdf
+</button>
+
+<div #pdfContent style="display: flex; flex-direction: column;">
+	<div style="page-break-after: always">1</div>
+	<!--ADD_PAGE-->
+
+	<div style="page-break-after: always">2</div>
+	<div style="page-break-after: always">3</div>
+</div>
+
