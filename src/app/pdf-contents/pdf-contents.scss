@@ -1,0 +1,31 @@
+h1 {
+	background-color: teal;
+}
+
+.page {
+	page-break-after: always;
+}
+
+@media print {
+	/* Force background colors and styles */
+	body,
+	.page,
+	h1,
+	p {
+		background-color: inherit !important; /* Ensure background color */
+		color: inherit !important; /* Ensure text color */
+		-webkit-print-color-adjust: exact; /* For Chrome and Safari */
+		print-color-adjust: exact; /* Standard property */
+	}
+
+	/* Remove unwanted margins or padding */
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	/* Ensure full visibility of printable content */
+	.printable-content {
+		display: block !important;
+	}
+}

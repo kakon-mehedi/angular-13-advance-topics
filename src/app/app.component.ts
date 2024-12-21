@@ -1,49 +1,86 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+	ChangeDetectorRef,
+	Component,
+	ComponentFactoryResolver,
+	ComponentRef,
+	ElementRef,
+	Renderer2,
+	ViewChild,
+	ViewContainerRef,
+} from '@angular/core';
+import domToPdf from 'dom-to-pdf';
+import printJS from 'print-js';
+import { PdfContents } from './pdf-contents/pdf-contents';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-	@ViewChild('pdfContent', { static: false }) pdfContent!: ElementRef;
+	value = false;
 
-  exportToPDF() {
-    const element = this.pdfContent.nativeElement;
+	@ViewChild('container', { read: ViewContainerRef, static: false })
+	container!: ViewContainerRef;
 
-    // Create a canvas and render the HTML content
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    const rect = element.getBoundingClientRect();
-    canvas.width = rect.width * 2; // For better quality
-    canvas.height = rect.height * 2;
+	constructor(private cdr: ChangeDetectorRef) {}
 
-    if (context) {
-      // Scale for better quality
-      context.scale(2, 2);
+	exportToPdf2() {
+		const element: HTMLElement = this.resolveComponent();
+		this.print(element);
+	}
 
-      // Set background color
-      context.fillStyle = getComputedStyle(element).backgroundColor || '#fff';
-      context.fillRect(0, 0, canvas.width, canvas.height);
+	resolveComponent(): HTMLElement {
+		if (!this.container) {
+			throw new Error('ViewContainerRef is not initialized.');
+		}
 
-      // Optionally: Use external libraries like html2canvas to render the DOM
-      // Here, we're simply simulating manual rendering.
-    }
+		// Use createComponent to dynamically create the component
+		const componentRef: ComponentRef<PdfContents> =
+			this.container.createComponent(PdfContents);
 
-    // Convert the canvas to an image and embed in PDF
-    canvas.toBlob((blob) => {
-      if (blob) {
-        const url = URL.createObjectURL(blob);
+		// Access the native element
+		const nativeElement = componentRef.location.nativeElement;
 
-        // Create a link to download the file
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'output.pdf';
-        link.click();
+		// Removing native element adding with the DOM view
+		// componentRef.destroy();
 
-        // Revoke object URL
-        URL.revokeObjectURL(url);
-      }
-    }, 'image/jpeg');
-  }
+		return nativeElement;
+	}
+
+	exportToPdf() {
+		// Dynamically create the PdfContents component
+		const componentRef: ComponentRef<PdfContents> =
+			this.container.createComponent(PdfContents);
+
+		// Ensure rendering completes
+		this.cdr.detectChanges();
+
+		// Access the native element
+		const nativeElement = componentRef.location.nativeElement;
+
+		// Temporarily append the element to the body for printing
+		const tempContainer = document.createElement('div');
+		//tempContainer.style.visibility = 'hidden';
+		document.body.appendChild(tempContainer);
+		tempContainer.appendChild(nativeElement);
+
+		// Trigger the print operation
+		setTimeout(() => {
+			this.print(nativeElement);
+
+			// Clean up the temporary container after printing
+			document.body.removeChild(tempContainer);
+			componentRef.destroy(); // Destroy the dynamically created component
+		}, 0);
+	}
+
+	print(element: HTMLElement) {
+		printJS({
+			printable: element,
+			type: 'html',
+			targetStyles: ['*'],
+			showModal: false,
+		});
+	}
 }

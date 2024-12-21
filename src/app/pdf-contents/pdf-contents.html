@@ -1,0 +1,13 @@
+<div
+	#printableContent
+	class="printable-content"
+>
+	<h1>Static Contents</h1>
+	<div
+		*ngFor="let content of contents"
+		class="page"
+	>
+		<h1>{{ content.Title }}</h1>
+		<p>{{ content.Description }}</p>
+	</div>
+</div>
