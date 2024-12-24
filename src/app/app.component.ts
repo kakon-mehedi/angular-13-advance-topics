@@ -1,12 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import html2pdf from 'html2pdf.js';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import htmlToPdfmake from 'html-to-pdfmake';
 import jsPDF from 'jspdf';
 
-// Ensure the pdfMake uses vfs_fonts
-(pdfMake as any).vfs = (pdfFonts as any).pdfMake.vfs;
 
 @Component({
 	selector: 'app-root',
@@ -35,8 +30,8 @@ export class AppComponent {
 	};
 
 	exportToPdf() {
-		this.exportWithJspdf(this.elementRef.nativeElement);
-		//this.exportPdfByHtml2PdfPackage();
+		//this.exportWithJspdf(this.elementRef.nativeElement);
+		this.exportPdfByHtml2PdfPackage();
 	}
 
 	exportPdfByHtml2PdfPackage() {
@@ -76,19 +71,19 @@ export class AppComponent {
 	exportByPdfMake() {
 		// Get the HTML element to export
 		const contentElement = this.elementRef.nativeElement;
-		if (contentElement) {
-			// Convert the HTML to pdfMake content
-			const html = contentElement.innerHTML;
-			const pdfContent = htmlToPdfmake(html);
+		// if (contentElement) {
+		// 	// Convert the HTML to pdfMake content
+		// 	const html = contentElement.innerHTML;
+		// 	// const pdfContent = htmlToPdfmake(html);
 
-			// Create the PDF document definition
-			const documentDefinition = {
-				content: pdfContent,
-			};
+		// 	// Create the PDF document definition
+		// 	const documentDefinition = {
+		// 		content: pdfContent,
+		// 	};
 
-			// Generate the PDF
-			pdfMake.createPdf(documentDefinition).download('exported.pdf');
-		}
+		// 	// Generate the PDF
+		// 	// pdfMake.createPdf(documentDefinition).download('exported.pdf');
+		// }
 	}
 
 	exportWithJspdf(element: HTMLElement) {
