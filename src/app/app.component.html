@@ -1,1 +1,5 @@
-<h1>Hello World</h1>
+<h1>Notifications</h1>
+<button (click)="sendTestNotification()">Send Test Notification</button>
+<ul>
+  <li *ngFor="let notification of notifications">{{ notification.title }}</li>
+</ul>
